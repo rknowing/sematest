@@ -2,6 +2,9 @@
 - hosts: all
   become: true
   tasks:
-    - name: print OS info
-      ansible.builtin.package:
-        name: apache2
+    - name: install updates Arch
+      tags: always
+      community.general.pacman:
+        update_cache: yes
+        upgrade: yes
+      when: ansible_distribution == "Archlinux"
